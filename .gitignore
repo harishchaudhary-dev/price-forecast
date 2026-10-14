@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+.pytest_cache/
+models/*/
+!models/.gitkeep
+django_service/models/*/
+django_service/db.sqlite3
+.env
+node_modules/
+.next/
