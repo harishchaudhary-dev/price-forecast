@@ -26,9 +26,10 @@ class ForecastApiTests(TestCase):
         self.c = APIClient()
 
     def test_root_redirects_to_health(self):
-        response = self.c.get("/")
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response["Location"], "/api/health/")
+        response = self.c.get("/", follow=True)
+        self.assertEqual(response.redirect_chain, [("/api/health/", 302)])
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["status"], "ok")
 
     def test_forecast_public_and_logged(self):
         r = self.c.get("/api/forecast/?horizon=6")
